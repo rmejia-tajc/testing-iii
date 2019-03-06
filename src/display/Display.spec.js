@@ -30,13 +30,53 @@ describe('<Display /> Component', () => {
 
     it('should default to (unlocked) and (open)', () => {
 
-        const { getByText } = render(<Display />);
+        const { getByTestId } = render(<Display />);
 
-        const unlocked = getByText(/unlocked/i);
-        const open= getByText(/open/i);
+        const unlockedLocked = getByTestId(/unlockedLocked/i);
+        const openClosed= getByTestId(/openClosed/i);
 
-        expect(unlocked).toBeInTheDocument();
-        expect(open).toBeInTheDocument();
+        expect(unlockedLocked).toBeInTheDocument();
+        expect(openClosed).toBeInTheDocument();
+    });
+
+
+    it('when unlocked use the green-led class', () => {
+
+        const { getByTestId } = render(<Display locked={false}/>);
+
+        const unlockedLocked = getByTestId('unlockedLocked');
+
+        expect(unlockedLocked).toHaveClass('led green-led');
+    });
+
+
+    it('when open use the green-led class', () => {
+
+        const { getByTestId } = render(<Display closed={false}/>);
+
+        const openClosed = getByTestId('openClosed');
+
+        expect(openClosed).toHaveClass('led green-led');
+    });
+
+
+    it('when locked use the red-led class', () => {
+
+        const { getByTestId } = render(<Display locked={true}/>);
+
+        const unlockedLocked = getByTestId('unlockedLocked');
+
+        expect(unlockedLocked).toHaveClass('led red-led');
+    });
+
+
+    it('when closed use the red-led class', () => {
+
+        const { getByTestId } = render(<Display closed={true}/>);
+
+        const openClosed = getByTestId('openClosed');
+        
+        expect(openClosed).toHaveClass('led red-led');
     });
 
 

@@ -7,11 +7,13 @@ Array [
   >
     <div
       className="led green-led"
+      data-testid="unlockedLocked"
     >
       Unlocked
     </div>
     <div
       className="led green-led"
+      data-testid="openClosed"
     >
       Open
     </div>
@@ -21,6 +23,7 @@ Array [
   >
     <button
       className="toggle-btn"
+      data-testid="lockUnlockGate"
       disabled={true}
       onClick={[Function]}
     >
@@ -28,6 +31,7 @@ Array [
     </button>
     <button
       className="toggle-btn"
+      data-testid="closeOpenGate"
       disabled={false}
       onClick={[Function]}
     >

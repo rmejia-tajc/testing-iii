@@ -1,7 +1,7 @@
 // Test away!
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
 import renderer from 'react-test-renderer';
@@ -30,13 +30,37 @@ describe('<Controls /> Component', () => {
 
     it('should default to (lock gate) and (close gate)', () => {
 
-        const { getByText } = render(<Controls />);
+        const { getByTestId } = render(<Controls />);
 
-        const btnLock = getByText(/lock gate/i);
-        const btnClose= getByText(/close gate/i);
+        const btnLockUnlock = getByTestId(/lockUnlockGate/i);
+        const btnCloseOpen= getByTestId(/closeOpenGate/i);
 
-        expect(btnLock).toBeInTheDocument();
-        expect(btnClose).toBeInTheDocument();
+        expect(btnLockUnlock).toBeInTheDocument();
+        expect(btnCloseOpen).toBeInTheDocument();
+    });
+
+
+    it('the "lock gate" button should be disabled if the gate is open', () => {
+
+        const { getByTestId } = render(<Controls closed={false}/>);
+        
+        const btnLockUnlock= getByTestId(/lockUnlockGate/i);
+        fireEvent.click(btnLockUnlock);
+
+        expect(btnLockUnlock).toBeDisabled();
+
+    });
+
+
+    it('the "open gate" button should be disabled if the gate is locked', () => {
+
+        const { getByTestId } = render(<Controls locked={true}/>);
+        
+        const btnCloseOpen= getByTestId(/closeOpenGate/i);
+        fireEvent.click(btnCloseOpen);
+
+        expect(btnCloseOpen).toBeDisabled();
+
     });
 
 
