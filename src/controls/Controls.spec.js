@@ -28,7 +28,7 @@ describe('<Controls /> Component', () => {
     });
 
 
-    it('should default to unlocked(lock gate) and open(close gate)', () => {
+    it('should default to (lock gate) and (close gate)', () => {
 
         const { getByText } = render(<Controls />);
 
